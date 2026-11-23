@@ -7,15 +7,16 @@
   ];
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   const visible = new Set();
+  let expanded = null;
 
   function updateVideo(video) {
     const group = video.closest(".comparison-case");
     const enabled = !group.hidden && group.dataset.playing === "true";
-    if (!visible.has(video) || !enabled || document.hidden) {
+    if ((!visible.has(video) && expanded !== video) || (expanded && expanded !== video) || !enabled || document.hidden) {
       video.pause();
       return;
     }
-    if (!video.hasAttribute("src")) video.src = video.dataset.src;
+    if (!video.hasAttribute("src")) video.src = video.dataset.preview;
     video.play().catch(() => {});
   }
 
@@ -31,7 +32,8 @@
   // Release offscreen decoders as the reader moves between the nine cases.
   const distant = new IntersectionObserver(entries => {
     for (const {target: video, isIntersecting} of entries) {
-      if (!isIntersecting && video.hasAttribute("src") && !visible.has(video)) {
+      if (isIntersecting && !video.hasAttribute("poster")) video.poster = video.dataset.poster;
+      if (!isIntersecting && video.hasAttribute("src") && !visible.has(video) && video !== expanded) {
         video.removeAttribute("src");
         video.load();
       }
@@ -125,8 +127,8 @@
       const video = document.createElement("video");
       video.muted = video.defaultMuted = video.loop = video.playsInline = true;
       video.preload = "none";
-      video.poster = path + "poster.jpg";
-      video.dataset.src = path + "video.mp4";
+      video.dataset.poster = path + "poster.jpg";
+      video.dataset.preview = path + "preview.mp4";
       video.setAttribute("aria-label", title + " — " + label);
       frame.append(video);
       if (frame.requestFullscreen || video.webkitEnterFullscreen) {
@@ -134,8 +136,24 @@
         expand.type = "button";
         expand.className = "comparison-expand";
         expand.setAttribute("aria-label", "Full screen: " + title + " — " + label);
+        function selectQuality(fullscreen) {
+          const source = fullscreen ? path + "video.mp4" : video.dataset.preview;
+          if (video.getAttribute("src") === source) return;
+          const position = video.currentTime;
+          expanded = fullscreen ? video : null;
+          video.preload = "auto";
+          video.onloadedmetadata = () => {
+            video.onloadedmetadata = null;
+            if (position && Number.isFinite(video.duration)) video.currentTime = Math.min(position, video.duration);
+            updateVideo(video);
+          };
+          video.src = source;
+          visible.forEach(updateVideo);
+        }
+        frame.addEventListener("fullscreenchange", () => selectQuality(document.fullscreenElement === frame));
+        video.addEventListener("webkitbeginfullscreen", () => selectQuality(true));
+        video.addEventListener("webkitendfullscreen", () => selectQuality(false));
         expand.onclick = async () => {
-          if (!video.hasAttribute("src")) video.src = video.dataset.src;
           if (document.fullscreenElement === frame) await document.exitFullscreen();
           else if (frame.requestFullscreen) await frame.requestFullscreen();
           else video.webkitEnterFullscreen();

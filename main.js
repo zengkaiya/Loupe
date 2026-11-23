@@ -72,7 +72,7 @@
       featuredIndex = index;
       const item = featured[index];
       video.poster = item.poster;
-      video.src = item.video;
+      video.src = item.video.replace(/video\.mp4$/, "preview.mp4");
       video.setAttribute("aria-label", item.title + " preview");
       document.getElementById("featured-title").textContent = item.title;
       track.querySelectorAll("button").forEach(button => {
