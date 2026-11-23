@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#0b0d16">
+  <meta name="description" content="Loupe: Reinforcing Knowledge-Intensive Video Generation Agents. Explore 30 generated videos and their search dialogues.">
+  <title>Loupe: Reinforcing Knowledge-Intensive Video Generation Agents</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="./site.css">
+  <link rel="stylesheet" href="./loupe.css">
+</head>
+<body>
+<header class="masthead" id="overview">
+  <div class="wrap masthead-inner">
+    <a class="wordmark" href="#overview" aria-label="Loupe overview"><span class="lens" aria-hidden="true"></span>Loupe</a>
+    <nav aria-label="Page navigation"><a href="#gallery">Video cases</a><a href="#case-detail">Search dialogue</a></nav>
+  </div>
+</header>
+<main>
+  <section id="hero" class="opening" aria-labelledby="paper-title">
+    <div class="wrap opening-layout">
+      <div class="credits">
+        <h1 id="paper-title"><span class="title-line"><em>Loupe:</em> Reinforcing</span> <span class="subtitle">Knowledge-Intensive Video Generation Agents</span></h1>
+        <div class="paper-authors" aria-label="Authors">
+          <span>Kai Zeng<sup>1,2</sup>*</span><span>Ruichuan An<sup>2</sup>*</span><span>Zhen Fang<sup>3</sup></span><span>Xi Fang<sup>1</sup>†</span><span>Han Lyu<sup>1</sup></span><span>Moran Li<sup>4</sup></span><span>Yingchen Yu<sup>5</sup></span><span>Yifan Dai<sup>6</sup></span><span>Bohan Zeng<sup>2</sup></span><span>Quanqing Xu<sup>7</sup></span><span>Zhengzhou Zhu<sup>2</sup></span><span>Wentao Zhang<sup>2</sup>‡</span>
+        </div>
+        <div class="institutions" aria-label="Affiliations">
+          <span><sup>1</sup> DP·Tech</span><span><sup>2</sup> PKU</span><span><sup>3</sup> USTC</span><span><sup>4</sup> HUST</span><span><sup>5</sup> NTU</span><span><sup>6</sup> SJTU</span><span><sup>7</sup> ANT</span>
+        </div>
+        <p class="author-notes"><span>* Equal contribution</span> <span>† Project leader</span> <span>‡ Corresponding author</span></p>
+      </div>
+      <div class="screening" aria-label="Featured video previews">
+        <div class="screen">
+          <video id="featured-video" src="./media/1/video.mp4" poster="./media/1/poster.jpg" muted playsinline preload="metadata" aria-label="Tesla Roadster preview"></video>
+          <div class="screen-controls">
+            <div class="screen-caption"><h2 id="featured-title">Tesla Roadster</h2></div>
+            <button class="transport" type="button" id="preview-toggle" aria-label="Play preview"><span aria-hidden="true"></span></button>
+          </div>
+          <div class="playhead" aria-hidden="true"><div id="elapsed"></div></div>
+        </div>
+        <div class="filmstrip" id="filmstrip" role="group" aria-label="Select a featured preview"></div>
+        <div class="feature-footer"><button id="open-feature" type="button">View trajectory</button></div>
+      </div>
+    </div>
+  </section>
+  <section id="gallery" class="wrap case-library" aria-labelledby="gallery-title">
+    <div class="section-head">
+      <h2 id="gallery-title">Video cases</h2>
+      <div class="pager"><button type="button" id="previous" aria-label="Previous batch"><span aria-hidden="true"></span></button><button type="button" id="next" aria-label="Next batch"><span aria-hidden="true"></span></button></div>
+    </div>
+    <div class="case-rail" id="case-gallery"></div>
+  </section>
+  <section id="case-detail" class="wrap case-detail" aria-label="Search dialogue"></section>
+</main>
+<script defer src="./vendor/runtime.js"></script>
+<script defer src="./vendor/react.js"></script>
+<script defer src="./vendor/react-dom.js"></script>
+<script defer src="./vendor/components.js"></script>
+<script defer src="./vendor/presentation.js"></script>
+<script defer src="./cases.js"></script>
+<script defer src="./dialogue.js"></script>
+<script defer src="./main.js"></script>
+</body>
+</html>
