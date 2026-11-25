@@ -11,9 +11,7 @@ button:focus-visible,a:focus-visible,video:focus-visible{outline:2px solid var(-
 .masthead{background:#0b0d16;border-bottom:1px solid var(--line)}
 .masthead-inner{display:flex;align-items:center;justify-content:space-between;min-height:4.7rem}
 .wordmark{display:inline-flex;align-items:center;gap:.64rem;color:#f8f7ff;font-weight:600;font-size:1.42rem;line-height:1;letter-spacing:-.065em}
-.lens{position:relative;display:inline-block;width:1.64rem;height:1.64rem;border-radius:50%;border:1.5px solid #c9bbff;box-shadow:inset 0 0 0 3px #262135;background:conic-gradient(from 25deg,#7867b9,#352b4b,#aa92e4,#4a3c6b,#7867b9)}
-.lens:before{content:"";position:absolute;inset:5px;border:1px solid #d7c8ffb3;border-radius:50%}
-.lens:after{content:"";position:absolute;width:5px;height:5px;left:7px;top:6px;background:#eee6ff;border-radius:50%}
+.wordmark img{display:block;flex:none;width:1.75rem;height:1.75rem}
 .masthead nav{display:flex;gap:clamp(1rem,2.7vw,2.5rem);font-size:.92rem;color:#c4c3d2}
 .masthead a:hover,.feature-footer button:hover{color:#e3d9ff}
 .opening{position:relative;isolation:isolate;overflow:hidden;border-bottom:1px solid var(--line);background:radial-gradient(ellipse at 81% 29%,#36345c 0,transparent 42%),radial-gradient(ellipse at 0 100%,#191d32,transparent 55%),#0e101b}
